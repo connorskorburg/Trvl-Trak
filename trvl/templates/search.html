@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Search</title>
+  {% load static %}
+  <link rel="stylesheet" href="{% static 'css/style.css' %}">
+  <link rel="stylesheet" href="{% static 'css/map.css' %}">
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
+  <script src="https://maps.googleapis.com/maps/api/js?key={{ key }}&callback=initMap&libraries=&v=weekly" defer ></script>
+  <script src="{% static 'js/geocode.js' %}"></script>
+</head>
+<body>
+
+  <nav class="top-nav">
+
+    <section class="inner-nav">
+
+      <article class="logo">
+        
+        <img src="../static/images/trvl-logo.svg" alt="Trvl Logo">
+
+        <h1 class="brand">Trvl Trak</h1>
+
+      </article>
+
+      <article class="logout-link">
+
+        <a class="login" href="/logout">logout</a>
+
+      </article>
+
+    </section>
+
+    
+  </nav>
+
+  <main>
+
+    <div id="floating-panel">
+    
+      <input id="address" type="textbox" value="Sydney, NSW" />
+    
+      <input id="submit" type="button" value="Geocode" />
+    
+    </div>
+
+    <div id="search-map"></div>
+
+  </main>
+
+  <main id="results">
+
+    <h1>Results:</h1>
+
+    <div id="results-content">
+
+      
+    </div>
+
+
+  </main>
+  
+</body>
+</html>

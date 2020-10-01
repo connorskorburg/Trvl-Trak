@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Trvl Trak</title>
+  <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@500&display=swap" rel="stylesheet">
+  {% load static %}
+  <link rel="stylesheet" href="{% static 'css/style.css' %}">
+  <script defer src="{% static 'js/hamburger.js' %}"></script>
+</head>
+<body>
+  <!-- top navigation -->
+  <nav class="top-nav">
+
+    <section class="inner-nav">
+
+      <article class="logo">
+        
+        <img src="../static/images/trvl-logo.svg" alt="Trvl Logo">
+
+        <h1 class="brand">Trvl Trak</h1>
+
+      </article>
+
+      <article class="links">
+
+        <a class="link" href="#about">about</a>
+        <a class="link" href="#contact">contact</a>
+        <a class="login" href="#">login</a>
+        <a class="get-started" href="/register">Register</a>
+
+      </article>
+
+      <img id="hamburger" src="../static/images/hamburger.svg" alt="Hamburger Icon">
+
+    </section>
+
+  </nav>
+
+  <nav class="mobile-nav">
+
+    <img id="close" src="../static/images/close-white.svg" alt="Close Icon">
+    <section>
+
+      <a class="mobile-link" href="#about">about</a>
+      <a class="mobile-link" href="#contact">contact</a>
+      <a class="mobile-link" href="#">login</a>
+      <a class="mobile-link" href="/register">Register</a>
+
+
+    </section>
+
+
+  </nav>
+  
+  <!-- hero content -->
+  <main id="hero">
+
+    <div class="hero-bg-img"></div>
+
+    <h1>Track Your Adventures</h1>
+    
+    <p>Never lose track of your trips again</p>
+
+    <div class="btn-container">
+
+      <a href="/register" class="get-started">Get Started</a>
+      <a href="#" class="login">Login</a>
+
+
+    </div>
+
+
+
+  </main>
+
+
+
+  <!-- about content -->
+  <main id="about">
+
+    <h2>About</h2>
+
+    <section id="about-inner">
+
+      <article class="card search">
+
+        <img src="../static/images/search.jpg" alt="Save Image">
+
+        <h3>Search Trips</h3>
+
+        <p>Find locations of your past trips or of future trips.</p>
+
+        <a href="/register" class="btn-block">Get Started</a>
+
+
+      </article>
+      
+      <article class="card save">
+
+        <img src="../static/images/save.jpg" alt="Save Image">
+
+        <h3>Save Trips</h3>
+
+        <p>Create an account and save your adventures to your dashboard.</p>
+
+        <a href="/register" class="btn-block">Get Started</a>
+
+
+      </article>
+      
+      <article class="card manage">
+
+        <img src="../static/images/manage.jpg" alt="Save Image">
+
+        <h3>Manage Trips</h3>
+
+        <p>Edit your adventures, delete them, or plan for future trips.</p>
+
+        <a href="/register" class="btn-block">Get Started</a>
+
+
+      </article>
+      
+    </section>
+
+  </main>
+
+
+  <!-- contact content -->
+  <main id="contact">
+
+    <h2>Contact</h2>
+
+    <section id="contact-inner">
+
+      <article class="contact-links">
+
+        <div class="contact-link linkedin-link">
+
+          <img src="../static/images/linkedin.svg" alt="Linkedin Icon">
+          <a href="https://linkedin.com/in/connor-skorburg">linkedin.com/in/connor-skorburg</a>
+
+        </div>
+
+        <div class="contact-link github-link">
+
+          <img src="../static/images/github.svg" alt="Github Icon">
+          <a href="https://github.com/connorskorburg">github.com/connorskorburg</a>
+
+        </div>
+
+
+
+      </article>
+
+
+      <article class="contact-form">
+
+        <form action="/contact" method="post">
+        {% csrf_token %}
+
+          <label for="full-name">Name</label>
+          <input type="text" name="name" id="full-name">
+
+          <label for="contact-email">Email</label>
+          <input type="email" name="contact-email" id="contact-email">
+
+          <label for="message">Message</label>
+          <textarea name="message" id="message"></textarea>
+
+          <button type="submit">Send</button>
+        
+        </form>
+
+
+      </article>
+
+
+    </section>
+
+
+  </main>
+
+
+
+
+</body>
+</html>

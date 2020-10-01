@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard</title>
+  {% load static %}
+  <link rel="stylesheet" href="{% static 'css/style.css' %}">
+  <link rel="stylesheet" href="{% static 'css/map.css' %}">
+  <script async defer src="https://maps.googleapis.com/maps/api/js?key={{ key }}&callback=initMap" type="text/javascript"></script>
+  <script defer src="{% static 'js/map.js' %}"></script>
+</head>
+<body>
+
+  <nav class="top-nav">
+
+    <section class="inner-nav">
+
+      <article class="logo">
+        
+        <img src="../static/images/trvl-logo.svg" alt="Trvl Logo">
+
+        <h1 class="brand">Trvl Trak</h1>
+
+      </article>
+
+      <article class="logout-link">
+
+        <a class="login" href="/logout">logout</a>
+
+      </article>
+
+    </section>
+
+    
+  </nav>
+
+  <main id="map-container">
+
+    <div id="map"></div>
+
+    <form action="/getLatLng" method="POST">
+      {% csrf_token %}
+      <label for="location-input">Address/Location</label>
+      <input type="text" name="location-input" placeholder="1234 Maple St." id="location-input">
+
+      <button type="submit">Find</button>
+
+    </form>
+
+  </main>
+  
+</body>
+</html>

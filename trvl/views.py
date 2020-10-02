@@ -25,3 +25,31 @@ def search(request):
 def getLatLng(request):
   request.session['location'] = request.POST['location-input']
   return redirect('/search')
+
+# add to favorites
+def addFav(request):
+  print(request)
+
+  address = request.GET.get('address')
+  lat = request.GET.get('lat')
+  lng = request.GET.get('lng')
+
+  if lat == None or lng == None or address == None:
+    return redirect('/')
+  try:
+    lat = float(lat)
+    lng = float(lng)
+    print(True)
+  except ValueError:
+    print(False)
+    return redirect('/search')
+
+  if lat > 90 or lat < -90 or lng > 180 or lng < -180 or address == '':
+    return redirect('/search')
+  else:
+    context = {
+      'address': address,
+      'lat': lat,
+      'lng': lng
+    }
+    return render(request, 'newFav.html', context)

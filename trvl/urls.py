@@ -6,4 +6,5 @@ urlpatterns = [
     path('dashboard', views.dashboard),
     path('search', views.search),
     path('getLatLng', views.getLatLng),
+    path('addFav', views.addFav),
 ]

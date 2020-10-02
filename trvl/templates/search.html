@@ -10,6 +10,7 @@
   <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
   <script src="https://maps.googleapis.com/maps/api/js?key={{ key }}&callback=initMap&libraries=&v=weekly" defer ></script>
   <script src="{% static 'js/geocode.js' %}"></script>
+  <!-- <script src="{% static 'js/fav.js' %}"></script> -->
 </head>
 <body>
 
@@ -60,7 +61,7 @@
 
   <main id="results">
 
-    <h1>Results:</h1>
+    <h1>Results</h1>
 
     <div id="results-content">
 
@@ -69,6 +70,44 @@
 
 
   </main>
+
+
+  <main class="fav-form-outer">
+  <!--
+
+    <form class='fav-form' action='/addFav' method='POST'>
+      <img class="close-fav-form" src="../static/images/close.svg" alt="Close Icon">
+      <h2>Add To Favorites</h2>
+      {% csrf_token %}
+
+      <h4>Address</h4>
+      <h5>Chicago, IL</h5>
+      <input type='hidden' name='address' >
+
+      <input type='hidden' name='lng' >
+      <input type='hidden' name='lat' >
+
+      <h4>Title</h4>
+      <input type='text' name='title'/>
+
+      <h4>Date From</h4>
+      <input type="date" name="date-from">
+
+      <h4>Date To</h4>
+      <input type="date" name="date-to">
+
+      <h4>Description</h4>
+      <textarea type='text' name='title'></textarea>
+
+      <button type='submit' class='fav-btn'>Add</button>      
+
+    </form>
   
+  -->
+  </main> 
+
+  <script src="{% static 'js/fav.js' %}"></script>
+
+
 </body>
 </html>

@@ -53,3 +53,34 @@ def addFav(request):
       'lng': lng
     }
     return render(request, 'newFav.html', context)
+
+
+#validate new favorite trip data
+def validate_form(post_data):
+  errors = {}
+  
+  if post_data['address'] == '':
+    errors['address'] = "Please Enter Valid Address"
+  
+  if post_data['lng'] == '' or  float(post_data['lng']) > 180 or float(post_data['lng']) < -180:
+    errors['lng'] = 'Please Enter Valid Longitude'
+
+  if post_data['lat'] == '' or float(post_data['lat']) > 90 or float(post_data['lat']) < -90:
+    errors['lat'] = 'Please Enter Valid Latitude'
+
+  if post_data['trip-start'] == '':
+    errors['trip-start'] = 'Please Enter Valid Start Date'  
+
+  if post_data['trip-end'] == '':
+    errors['trip-end'] = 'Please Enter Valid End Date'
+
+  if post_data['description'] == '':
+    errors['description'] = 'Please Enter Valid Description'
+
+  return errors
+
+# add new favorite
+def newFav(request):
+  print(request.POST)
+  
+  return redirect('/dashboard')

@@ -33,16 +33,15 @@ function geocodeAddress(geocoder, resultsMap) {
       const lng = document.createElement('li');
       //form elements
       const form = document.createElement('form');
-      const span = document.createElement('span');
       const addressInput = document.createElement('input');
       const latInput = document.createElement('input');
       const lngInput = document.createElement('input');
       const button = document.createElement('button');
-      //set form and span attributes
+      //set form attributes
       form.setAttribute('action', '/addFav');      
       form.setAttribute('method', 'GET');
-      // span.textContent = '{% csrf_token %}';
       //set input to hidden
+      // csrf.setAttribute('type', 'hidden')
       addressInput.setAttribute('type', 'hidden');
       latInput.setAttribute('type', 'hidden');
       lngInput.setAttribute('type', 'hidden');
@@ -58,7 +57,6 @@ function geocodeAddress(geocoder, resultsMap) {
       button.classList.add('fav-btn')
       button.textContent = 'Add to Favorites'
       //append children to form
-      // form.appendChild(span);
       form.appendChild(addressInput);
       form.appendChild(latInput);
       form.appendChild(lngInput);
@@ -101,21 +99,3 @@ function geocodeAddress(geocoder, resultsMap) {
     }
   });
 }
-
-  //add marker
-  // function addMarker(location) {
-  //   const marker = new google.maps.Marker({
-  //     position: location,
-  //     map: map,
-  //   });
-  //   markers.push(marker);
-  // }
-
-  // function deleteMarkers() {
-  //   setMapOnAll(null);
-  //   markers = [];
-  // }
-  // function showMarkers() {
-  //   setMapOnAll(map);
-  // }
-

@@ -136,3 +136,56 @@
       list-style-type: none;
       margin: 1rem 0;
     }
+
+
+.new-favorite-content {
+  height: 100%;
+  width: 100%;
+  padding: 2rem 5%;
+}
+  .new-favorite {
+    background-color: #5B7192;
+    border: 2px solid #5B7192;
+    margin: 0 auto;
+    width: 350px;
+    padding: 1rem;
+    border-radius: 0.15rem;
+    box-shadow: 4px 4px 8px rgba(0,0,0,0.2);
+  }
+    .new-favorite h3 {
+      color: var(--white);
+      margin-bottom: 1rem;
+    }
+    .new-favorite label, .new-favorite address {
+      color: #eaf2ff;
+      display: block;
+      font-size: 1rem;
+      margin-bottom: 0.5rem;
+    }
+    .new-favorite address {
+      margin-bottom: 0.75rem;
+    }
+    .new-favorite input, .new-favorite textarea {
+      color: #eaf2ff;
+      background-color: #738fb9;
+      border: none;
+      outline: none;
+      border: 2px solid #738fb9;
+      box-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+      width: 100%;
+      font-size: 1rem;
+      padding: 0.5rem;
+      margin-bottom: 0.75rem;
+    }
+    .new-favorite input:focus, .new-favorite textarea:focus {
+      border: 2px solid var(--bgColor);
+    }
+    .new-favorite textarea {
+      height: 4rem;
+      resize: none;
+    }
+    .new-favorite button {
+      padding: 0.5rem 0;
+      font-size: 1rem;
+      margin-top: 0;
+    }

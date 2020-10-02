@@ -7,4 +7,5 @@ urlpatterns = [
     path('search', views.search),
     path('getLatLng', views.getLatLng),
     path('addFav', views.addFav),
+    path('newFav', views.newFav),
 ]

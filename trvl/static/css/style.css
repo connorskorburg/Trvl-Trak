@@ -77,17 +77,17 @@ body {
         background-color: transparent;
         transition: all 350ms ease-in-out;
       }
-      .link, .login {
+      .link, .login, .nav-link {
         color: var(--white);
         text-decoration: none;
         margin-left: 2rem;
         font-weight: 600;
         padding: 0.25rem 1.25rem;
       }
-      .link{
+      .link, .nav-link {
         border: 2px solid var(--bgColor);
       }
-      .link:hover {
+      .link:hover, .nav-link:hover {
         border-bottom: 2px solid var(--white);
         transition: all 350ms ease-in-out;
       }

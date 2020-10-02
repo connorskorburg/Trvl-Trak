@@ -26,6 +26,7 @@
 
       <article class="logout-link">
 
+        <a href="/search" class="nav-link">Search</a>
         <a class="login" href="/logout">logout</a>
 
       </article>
@@ -37,17 +38,26 @@
 
   <main id="map-container">
 
-    <div id="map"></div>
-
-    <form action="/getLatLng" method="POST">
+    
+    <form class="search-form" action="/getLatLng" method="POST">
+    
       {% csrf_token %}
-      <label for="location-input">Address/Location</label>
-      <input type="text" name="location-input" placeholder="1234 Maple St." id="location-input">
+    
+      <label for="location-input">Address</label>
+      
+      <div class="search-input">
 
-      <button type="submit">Find</button>
-
+        <input type="text" name="location-input" placeholder="Chicago, IL" id="location-input">
+        
+        <button type="submit">Find</button>
+      
+      </div>
+      
+      
     </form>
-
+    
+    <div id="map"></div>
+    
   </main>
   
 </body>

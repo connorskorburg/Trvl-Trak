@@ -27,6 +27,8 @@
 
       <article class="logout-link">
 
+        <a href="/dashboard" class="nav-link">Dashboard</a>
+
         <a class="login" href="/logout">logout</a>
 
       </article>
@@ -38,12 +40,18 @@
 
   <main>
 
-    <div id="floating-panel">
+    <div class='search-form'>
     
-      <input id="address" type="textbox" value="Sydney, NSW" />
-    
-      <input id="submit" type="button" value="Geocode" />
-    
+      <label for="address">Address</label>
+
+      <div class="search-input">
+
+        <input id="address" type="textbox" value="{{request.session.location}}" />
+        
+        <button id="submit">Find</button>
+        
+      </div>
+      
     </div>
 
     <div id="search-map"></div>
@@ -56,7 +64,7 @@
 
     <div id="results-content">
 
-      
+
     </div>
 
 

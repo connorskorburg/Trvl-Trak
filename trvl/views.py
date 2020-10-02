@@ -23,6 +23,5 @@ def search(request):
 
 # post request to handle api geocoding
 def getLatLng(request):
-  print(request.POST['location-input'])
-  url = ''
-  return redirect('/dashboard')
+  request.session['location'] = request.POST['location-input']
+  return redirect('/search')

@@ -1,6 +1,9 @@
 from django.shortcuts import render, redirect
 import os
 import requests
+from .models import *
+from django.contrib import messages
+import pymysql
 # Create your views here.
 
 
@@ -82,5 +85,10 @@ def validate_form(post_data):
 # add new favorite
 def newFav(request):
   print(request.POST)
-  
-  return redirect('/dashboard')
+  errors = validate_form(request.POST)
+  if len(errors) > 0:
+    for key, val in errors.items():
+      messages.error(request, val)
+    return redirect('/search')
+  else:
+    return redirect('/dashboard')

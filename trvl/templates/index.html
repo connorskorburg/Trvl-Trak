@@ -53,7 +53,27 @@
 
 
   </nav>
-  
+
+  <!-- login form popup -->
+  <main class="login-outer">
+
+    <form action="/login" class="login-form">
+
+      <img id="close-login" src="../static/images/close-white.svg" alt="Close Icon">
+      {% csrf_token %}
+
+      <label for="username">Username</label>
+      <input type="text" name="username">
+      
+      <label for="password">Password</label>
+      <input type="password" name="password">
+      
+      <button type="submit">Login</button>
+      
+      
+    </form>
+    
+  </main>
   <!-- hero content -->
   <main id="hero">
 

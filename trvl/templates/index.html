@@ -7,7 +7,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@500&display=swap" rel="stylesheet">
   {% load static %}
   <link rel="stylesheet" href="{% static 'css/style.css' %}">
-  <script defer src="{% static 'js/hamburger.js' %}"></script>
+  <script defer src="{% static 'js/toggle.js' %}"></script>
 </head>
 <body>
   <!-- top navigation -->
@@ -28,7 +28,7 @@
         <a class="link" href="#about">about</a>
         <a class="link" href="#contact">contact</a>
         <a class="login" href="#">login</a>
-        <a class="get-started" href="/register">Register</a>
+        <a class="get-started register" href="#">Register</a>
 
       </article>
 
@@ -45,8 +45,8 @@
 
       <a class="mobile-link" href="#about">about</a>
       <a class="mobile-link" href="#contact">contact</a>
-      <a class="mobile-link" href="#">login</a>
-      <a class="mobile-link" href="/register">Register</a>
+      <a class="mobile-link login-btn" href="#">login</a>
+      <a class="mobile-link register" href="#">Register</a>
 
 
     </section>
@@ -72,8 +72,41 @@
       
       
     </form>
+  </main>
+
+  <!-- register form popup -->
+
+  <main class="register-outer">
+
+    <form action="/register" class="register-form">
+
+      <img id="close-register" src="../static/images/close-white.svg" alt="Close Icon">
+      
+      {% csrf_token %}
+
+      <label for="first_name">First Name</label>
+      <input type="text" name="first_name">
+
+      <label for="first_name">Last Name</label>
+      <input type="text" name="last_name">
+
+      <label for="username">Username</label>
+      <input type="text" name="username">
+      
+      <label for="password">Password</label>
+      <input type="password" name="password">
+      
+      <label for="conf_password">Confirm Password</label>
+      <input type="password" name="conf_password">
+      
+      <button type="submit">Register</button>
+      
+      
+    </form>
     
   </main>
+
+
   <!-- hero content -->
   <main id="hero">
 
@@ -85,7 +118,7 @@
 
     <div class="btn-container">
 
-      <a href="/register" class="get-started">Get Started</a>
+      <a href="#" class="get-started register">Get Started</a>
       <a href="#" class="login">Login</a>
 
 
@@ -112,7 +145,7 @@
 
         <p>Find locations of your past trips or of future trips.</p>
 
-        <a href="/register" class="btn-block">Get Started</a>
+        <a href="#" class="btn-block register">Get Started</a>
 
 
       </article>
@@ -125,7 +158,7 @@
 
         <p>Create an account and save your adventures to your dashboard.</p>
 
-        <a href="/register" class="btn-block">Get Started</a>
+        <a href="#" class="btn-block register">Get Started</a>
 
 
       </article>
@@ -138,7 +171,7 @@
 
         <p>Edit your adventures, delete them, or plan for future trips.</p>
 
-        <a href="/register" class="btn-block">Get Started</a>
+        <a href="#" class="btn-block register">Get Started</a>
 
 
       </article>

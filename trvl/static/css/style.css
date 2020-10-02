@@ -56,7 +56,7 @@ body {
     #close {
       margin-bottom: 0.25rem;
     }
-    #close:hover, #hamburger:hover, #close-login:hover {
+    #close:hover, #hamburger:hover, #close-login:hover, #close-register:hover {
       transition: all 350ms ease-in-out;
       transform: rotate(180deg);
       cursor: pointer;
@@ -174,8 +174,8 @@ body {
     margin-left: 1rem;
     margin-right: 3rem;
   }
-  /* login popup */
-  .login-outer {
+  /* login/register popup */
+  .login-outer, .register-outer {
     display: none;
     width: 100%;
     padding-top: 22vh;
@@ -184,7 +184,7 @@ body {
     position: fixed;
     z-index: 3;
   }
-    .login-form {
+    .login-form, .register-form {
       width: 90%;
       margin: 0rem 5%;
       background-color: var(--bgColor);
@@ -192,13 +192,13 @@ body {
       border-radius: 0.15rem;
       box-shadow: 4px 4px 8px rgba(0,0,0,0.2);
     }
-      .login-form label {
+      .login-form label, .register-form label {
         display: block;
         font-weight: 600;
         color: var(--white);
         margin: 0.5rem 0 0.25rem 0;
       }
-      .login-form input {
+      .login-form input, .register-form input {
         padding: 0.25rem;
         font-size: 1rem;
         width: 100%;
@@ -209,11 +209,11 @@ body {
         box-shadow: 2px 2px 4px rgba(0,0,0,0.2);
         margin-bottom: 0.15rem;
       }
-      .login-form input:focus{
+      .login-form input:focus, .register-form input:focus{
         outline: none;
         border: 2px solid var(--white);
       }
-      .login-form button {
+      .login-form button, .register-form button {
         width: 100%;
         font-size: 1rem;
         font-weight: 600;
@@ -223,7 +223,7 @@ body {
         box-shadow: 2px 2px 4px rgba(0,0,0,0.2);
         border: 2px solid var(--white);
       }
-      .login-form button:hover {
+      .login-form button:hover, .register-form button:hover {
         cursor: pointer;
         color: var(--white);
         background-color: transparent;
@@ -410,7 +410,7 @@ body {
   }
 }
 @media screen and (min-width:450px){
-  .login-form {
+  .login-form, .register-form {
     width: 400px;
     margin: 0rem auto;
   }

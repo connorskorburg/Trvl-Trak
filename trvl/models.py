@@ -1,6 +1,7 @@
 from django.db import models
 import pymysql.cursors
 import os
+from better_profanity import profanity
 # Create your models here.
 
 class MySQLConnection:
@@ -37,3 +38,75 @@ class MySQLConnection:
 
 def connectToMySQL(db):
   return MySQLConnection(db)
+
+
+
+
+# VALIDATIONS
+
+
+#validate new favorite trip data
+def validate_form(post_data):
+  errors = {}
+  
+  if post_data['address'] == '':
+    errors['address'] = "Please Enter Valid Address"
+  
+  if post_data['lng'] == '' or  float(post_data['lng']) > 180 or float(post_data['lng']) < -180:
+    errors['lng'] = 'Please Enter Valid Longitude'
+
+  if post_data['lat'] == '' or float(post_data['lat']) > 90 or float(post_data['lat']) < -90:
+    errors['lat'] = 'Please Enter Valid Latitude'
+
+  if post_data['trip-start'] == '':
+    errors['trip-start'] = 'Please Enter Valid Start Date'  
+
+  if post_data['trip-end'] == '':
+    errors['trip-end'] = 'Please Enter Valid End Date'
+
+  if post_data['description'] == '':
+    errors['description'] = 'Please Enter Valid Description'
+
+  return errors
+
+# validate registration 
+def validate_registration(post_data):
+  errors = {}
+
+  if len(post_data['first_name']) < 1 or post_data['first_name'] == '':
+    errors['first_name'] = "First Name must contain 2 letters or more" 
+
+  if profanity.contains_profanity(post_data['first_name']) == True:
+    errors['bad_first_name'] = "Please Enter an appropriate First Name"
+
+  if len(post_data['last_name']) < 1 or post_data['last_name'] == '':
+    errors['last_name'] = "Last Name must contain 2 letters or more"
+
+  if profanity.contains_profanity(post_data['last_name']) == True:
+    errors['last_name'] = "Please Enter an appropriate Last Name"
+
+  if len(post_data['username']) < 4 or post_data['username'] == '':
+    errors['username'] = "Username must contain 5 letters or more"
+
+  if profanity.contains_profanity(post_data['username']) == True:
+    errors['bad_username'] = "Please Enter an appropriate username"
+
+  if len(post_data['password']) < 7 or post_data['password'] == '':
+    errors['password'] = "Password must contain 8 characters or more"
+
+  if post_data['password'] != post_data['conf_password']:
+    errors['conf_password'] = "Passwords do not match"
+
+  return errors
+  
+# validate login 
+def validate_login(post_data):
+  errors = {}
+
+  if len(post_data['username']) < 4 or post_data['username'] == '':
+    errors['username'] = "Please Enter valid username"
+
+  if len(post_data['password']) < 7 or post_data['password'] == '':
+    errors['password'] = "Please Enter valid password"
+
+  return errors

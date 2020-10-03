@@ -9,5 +9,6 @@ urlpatterns = [
     path('addFav', views.addFav),
     path('newFav', views.newFav),
     path('login', views.login),
+    path('logout', views.logout),
     path('register', views.register),
 ]

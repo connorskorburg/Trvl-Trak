@@ -38,6 +38,16 @@
 
   </nav>
 
+  {% if messages %}
+  <div class="messages abs messages-error">
+    {% for message in messages %}
+      {% if message.tags == 'error' %}
+        <p class="error">{{ message }}</p>
+      {% endif %}
+    {% endfor %}
+  </div>
+  {% endif %}
+
   <nav class="mobile-nav">
 
     <img id="close" src="../static/images/close-white.svg" alt="Close Icon">
@@ -57,7 +67,7 @@
   <!-- login form popup -->
   <main class="login-outer">
 
-    <form action="/login" class="login-form">
+    <form action="/login" class="login-form" method="POST">
 
       <img id="close-login" src="../static/images/close-white.svg" alt="Close Icon">
       {% csrf_token %}
@@ -78,7 +88,7 @@
 
   <main class="register-outer">
 
-    <form action="/register" class="register-form">
+    <form action="/register" class="register-form" method="POST">
 
       <img id="close-register" src="../static/images/close-white.svg" alt="Close Icon">
       

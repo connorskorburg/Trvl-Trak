@@ -18,6 +18,7 @@ const closeBtns = [closeNav, closeLogin, closeRegister];
 const toggler = (btns) => {
   btns.forEach((btn)=> {
     btn.addEventListener('click', ()=> {
+
       // register form
       if(btn.classList.contains('register')) {
         if(registerPop.style.display === 'none' || registerPop.style.display === '') {
@@ -26,6 +27,7 @@ const toggler = (btns) => {
         } else if (registerPop.style.display === 'block') {
           registerPop.style.display = 'none';
         }
+
       //login form
       } else if (btn.classList.contains('login')){
           if(loginPop.style.display === 'none' || loginPop.style.display === ''){
@@ -34,12 +36,14 @@ const toggler = (btns) => {
           } else if (loginPop.style.display === 'block') {
             loginPop.style.display = 'none';
           }
+
       //mobile nav
       } else if (btn.getAttribute('id') === 'hamburger'){
           navPop.style.display = 'block';
           registerPop.style.display = 'none';
           loginPop.style.display = 'none';
       }
+      
     });
   });
 }
@@ -48,24 +52,29 @@ const toggler = (btns) => {
 const closePopUp = (btns) => {
   btns.forEach((btn) => {
     btn.addEventListener('click', ()=> {
-      console.log(btn);
+
       // close nav
       if(btn.getAttribute('id') === 'close'){
         navPop.style.display = 'none';
+
       // close login
       } else if (btn.getAttribute('id') === 'close-login') {
         loginPop.style.display = 'none';
+
       //close register
       } else if (btn.getAttribute('id') === 'close-register') {
         registerPop.style.display = 'none';
+
       //close nav if you click a link
       } else if (btn.classList.contains('mobile-link')){
         navPop.style.display = 'none';
+
         // if link is login, open login form
         if(btn.classList.contains('login-btn')) {
           loginPop.style.display = 'block';
         }
       }
+
     });
   });
 }

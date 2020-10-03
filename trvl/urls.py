@@ -8,4 +8,6 @@ urlpatterns = [
     path('getLatLng', views.getLatLng),
     path('addFav', views.addFav),
     path('newFav', views.newFav),
+    path('login', views.login),
+    path('register', views.register),
 ]

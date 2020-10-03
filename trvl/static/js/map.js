@@ -1,4 +1,6 @@
 function initMap(){
+  const trips = document.getElementById('trips').value;
+  console.log(trips);
   let options = {
       zoom: 4,
       center: {lat: 41.8781, lng: -87.6298}

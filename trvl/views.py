@@ -6,6 +6,7 @@ from django.contrib import messages
 import pymysql
 from better_profanity import profanity
 import bcrypt
+import json
 # Create your views here.
 
 
@@ -15,21 +16,24 @@ def index(request):
 
 # post route to login
 def login(request):
+  # check for errors
   errors = validate_login(request.POST)
   if len(errors) > 0:
     for key, val in errors.items():
-      print(key, val)
       messages.error(request, val)
     return redirect('/')
   else:
+    # connect to db and find user with username 
     mysql = MySQLConnection('trvl-trak')
     query = 'SELECT * FROM user WHERE username = %(username)s'
     data = {
       'username': request.POST['username']
     }
     user = mysql.query_db(query, data)
+    # if valid user, check to see if password matches
     if user:
       user = user[0]
+      # if password matches, add user to session and redirect to dash
       if bcrypt.checkpw(request.POST['password'].encode(), user['password'].encode()):
         request.session['user_id'] = user['id']
         return redirect('/dashboard')
@@ -39,23 +43,25 @@ def login(request):
 
 # logout 
 def logout(request):
+  # clear session
   request.session.flush()
   return redirect('/')
 
 # post route to handle registration
 def register(request):
-  print(request.POST)
+  # check for errors
   errors = validate_registration(request.POST)
   if len(errors) > 0:
     for key, val in errors.items():
-      print(key, val)
       messages.error(request, val)
     return redirect('/')
+  # if valid info, hash & salt the password and add user to db
   elif request.POST['password'] == request.POST['conf_password']:
     password = request.POST['password']
     password_hash = bcrypt.hashpw(password.encode(), bcrypt.gensalt()).decode()
     # create user
     mysql = connectToMySQL('trvl-trak')
+    # add user to db
     query = 'INSERT INTO user (first_name, last_name, username, password, created_at, updated_at) VALUES (%(first_name)s, %(last_name)s, %(username)s, %(password)s, NOW(), NOW())'
     data = {
       'first_name': request.POST['first_name'],
@@ -65,7 +71,7 @@ def register(request):
     }
     user_id = mysql.query_db(query, data)
     request.session['user_id'] = user_id
-    print('successful info')
+    request.session['location'] = 'Chicago, IL'
     return redirect('/dashboard')
 
 
@@ -74,8 +80,21 @@ def dashboard(request):
   if not 'user_id' in request.session:
     return redirect('/')
   else:
+    # return saved trips
+    mysql = MySQLConnection('trvl-trak')
+    query = 'SELECT * FROM trip WHERE user_id = %(user_id)s'
+    data = {
+      'user_id': request.session['user_id']
+    }
+    trips = mysql.query_db(query, data)
+    print(trips)
+    for t in trips:
+      print(t)
+
+    # return google map
     context = {
-      'key': os.environ.get('GOOGLE_API_KEY')
+      'key': os.environ.get('GOOGLE_API_KEY'),
+      'trips': trips
     }
     return render(request, 'dashboard.html', context)
     
@@ -84,6 +103,7 @@ def search(request):
   if not 'user_id' in request.session:
     return redirect('/')
   else:
+    # return google map
     context = {
       'key': os.environ.get('GOOGLE_API_KEY')
     }
@@ -94,16 +114,20 @@ def getLatLng(request):
   if not 'user_id' in request.session:
     return redirect('/')
   else:
-    request.session['location'] = request.POST['location-input']
-    return redirect('/search')
+    # get lat and lng from google maps api
+    if request.POST['location-input'] == '':
+      request.session['location'] = 'Chicago, IL'
+      return redirect('/search')
+    else:
+      request.session['location'] = request.POST['location-input']
+      return redirect('/search')
 
 # add to favorites
 def addFav(request):
   if not 'user_id' in request.session:
     return redirect('/')
   else:
-    print(request)
-
+    # validate address, lat, lng
     address = request.GET.get('address')
     lat = request.GET.get('lat')
     lng = request.GET.get('lng')
@@ -113,9 +137,7 @@ def addFav(request):
     try:
       lat = float(lat)
       lng = float(lng)
-      print(True)
     except ValueError:
-      print(False)
       return redirect('/search')
 
     if lat > 90 or lat < -90 or lng > 180 or lng < -180 or address == '':
@@ -134,13 +156,29 @@ def newFav(request):
   if not 'user_id' in request.session:
     return redirect('/')
   else:
-    print(request.POST)
+    # check for errors
+    print(request)
     errors = validate_form(request.POST)
     if len(errors) > 0:
       for key, val in errors.items():
         messages.error(request, val)
       return redirect('/search')
-    else:
+    elif request.POST['trip-start'] <= request.POST['trip-end']:
+      mysql = MySQLConnection('trvl-trak')
+      query = 'INSERT INTO trip (title, address, latitude, longitude, trip_start, trip_end, description, created_at, updated_at, user_id) VALUES (%(title)s, %(address)s, %(latitude)s, %(longitude)s, %(trip_start)s, %(trip_end)s, %(description)s, NOW(), NOW(), %(user_id)s)'
+      data = {
+        'title': request.POST['title'],
+        'address': request.POST['address'],
+        'latitude': request.POST['lat'],
+        'longitude': request.POST['lng'],
+        'trip_start': request.POST['trip-start'],
+        'trip_end': request.POST['trip-end'],
+        'description': request.POST['description'],
+        'user_id': request.session['user_id'],
+      }
+      new_trip_id = mysql.query_db(query, data)
+      # message.success(request, 'Successfully Added New Trip!')
       return redirect('/dashboard')
-
+    else:
+      return redirect('/search')
 

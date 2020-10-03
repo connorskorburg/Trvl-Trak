@@ -26,7 +26,6 @@
 
       <article class="logout-link">
 
-        <a href="/search" class="nav-link">Search</a>
         <a class="login" href="/logout">logout</a>
 
       </article>
@@ -59,6 +58,17 @@
     <div id="map"></div>
     
   </main>
+
+  <div class="trip-content">
+    <input id="trips" type="hidden" name="trips" value="{{ trips }}">
+
+    <h1>Saved Trips</h1>
+    {% for trip in trips %}
+    <p>{{ trip.title }}</p>
+    {% endfor %}
+
+
+  </div>
   
 </body>
 </html>

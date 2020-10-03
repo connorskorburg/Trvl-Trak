@@ -8,6 +8,7 @@ from better_profanity import profanity
 import bcrypt
 import json
 from json import JSONEncoder
+import smtplib
 # Create your views here.
 
 
@@ -74,6 +75,38 @@ def register(request):
     request.session['user_id'] = user_id
     request.session['location'] = 'Chicago, IL'
     return redirect('/dashboard')
+
+# email contact 
+def contact(request):
+  errors = validate_contact(request.POST)
+  if len(errors) > 0:
+    for key, val in errors.items():
+      messages.warning(request, val)
+    return redirect('/#contact')
+  else: 
+    # send message to email
+    with smtplib.SMTP('smtp.gmail.com', 587) as smpt:
+      
+      email_address = 'trvltrak@gmail.com'
+      name = request.POST['name']
+      user_email = request.POST['contact-email']
+      user_message = request.POST['message']
+
+      smpt.ehlo()
+      smpt.starttls()
+      smpt.ehlo()
+      
+      smpt.login(email_address, os.environ.get('TRVL_EMAIL_PASS'))
+      
+      subject = f'New Message from {name}, {user_email}'
+      body = user_message
+
+      message = f'Subject: {subject}\n\n{body}'
+
+      smpt.sendmail(email_address, email_address, message)
+    
+      messages.success(request, 'Email Successfully sent!')
+    return redirect('/')
 
 # encode datetime objects
 def endodeDate(d):

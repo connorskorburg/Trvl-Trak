@@ -7,10 +7,10 @@
   {% load static %}
   <link rel="stylesheet" href="{% static 'css/style.css' %}">
   <link rel="stylesheet" href="{% static 'css/map.css' %}">
-  <script async defer src="https://maps.googleapis.com/maps/api/js?key={{ key }}&callback=initMap" type="text/javascript"></script>
+  <script defer src="https://maps.googleapis.com/maps/api/js?key={{ key }}" type="text/javascript"></script>
   <script defer src="{% static 'js/map.js' %}"></script>
 </head>
-<body class="bg-color">
+<body onload="initMap()" class="bg-color">
 
   <nav class="top-nav">
 
@@ -34,6 +34,16 @@
 
     
   </nav>
+
+  {% if messages %}
+  <div class="messages messages-success">
+    {% for message in messages %}
+      {% if message.tags == 'success' %}
+        <p class="success">{{ message }}</p>
+      {% endif %}
+    {% endfor %}
+  </div>
+  {% endif %}
 
   <main id="map-container">
 
@@ -77,7 +87,7 @@
         <p class="date">{{ t.trip_start }}-{{ t.trip_end }}</p>
         <h4>Description</h4>
         <p class="description">{{ t.description }}</p>
-        <a href="trip/delete/{{ t.id }}" class="delete-btn">Remove Trip</a>
+        <a href="trip/delete/{{ t.id }}" class="delete-btn" data-ajax="false">Remove Trip</a>
 
       </article>
       

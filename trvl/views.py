@@ -223,3 +223,19 @@ def newFav(request):
     else:
       return redirect('/search')
 
+
+def deleteTrip(request, id):
+  if not 'user_id' in request.session:
+    return redirect('/')
+  else:
+    mysql = MySQLConnection('trvl-trak')
+    query = 'DELETE FROM trip WHERE id = %(trip_id)s AND user_id = %(user_id)s'
+    data = {
+      'trip_id': id,
+      'user_id': request.session['user_id'],
+    }
+    deleted = mysql.query_db(query, data)
+    messages.success(request, 'Trip successfully deleted!')
+    return redirect('/dashboard')
+
+

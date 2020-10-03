@@ -12,4 +12,5 @@ urlpatterns = [
     path('logout', views.logout),
     path('register', views.register),
     path('contact', views.contact),
+    path('trip/delete/<int:id>', views.deleteTrip),
 ]

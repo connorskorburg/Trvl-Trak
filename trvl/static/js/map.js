@@ -1,3 +1,4 @@
+
 function initMap(){
     const trips = document.getElementById('trips').value;
     const parsedResults = JSON.parse(trips);

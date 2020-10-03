@@ -7,6 +7,7 @@ import pymysql
 from better_profanity import profanity
 import bcrypt
 import json
+from json import JSONEncoder
 # Create your views here.
 
 
@@ -74,6 +75,10 @@ def register(request):
     request.session['location'] = 'Chicago, IL'
     return redirect('/dashboard')
 
+# encode datetime objects
+def endodeDate(d):
+  if isinstance(d, (datetime.date, datetime.datetime)):
+    return d.isoformat()
 
 # dashboard
 def dashboard(request):
@@ -89,12 +94,15 @@ def dashboard(request):
     trips = mysql.query_db(query, data)
     print(trips)
     for t in trips:
-      print(t)
+      t['trip_start'] = t['trip_start'].strftime('%m/%d/%Y')
+      t['trip_end'] = t['trip_end'].strftime('%m/%d/%Y')
+      t['created_at'] = t['created_at'].strftime('%m/%d/%Y')
+      t['updated_at'] = t['updated_at'].strftime('%m/%d/%Y')
 
     # return google map
     context = {
       'key': os.environ.get('GOOGLE_API_KEY'),
-      'trips': trips
+      'trips': json.dumps(trips)
     }
     return render(request, 'dashboard.html', context)
     

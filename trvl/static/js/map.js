@@ -19,8 +19,6 @@ function initMap(){
       })
   }
 
-  // let results = document.getElementById('restaurants').value;
-  // let parsedResults = JSON.parse(results);
 
   parsedResults.forEach(res => {
       let coords = {

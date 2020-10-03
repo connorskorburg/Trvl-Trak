@@ -10,7 +10,7 @@
   <script async defer src="https://maps.googleapis.com/maps/api/js?key={{ key }}&callback=initMap" type="text/javascript"></script>
   <script defer src="{% static 'js/map.js' %}"></script>
 </head>
-<body>
+<body class="bg-color">
 
   <nav class="top-nav">
 
@@ -60,10 +60,30 @@
   </main>
 
   <div class="trip-content">
-    <input id="trips" type="hidden" name="trips" value="{{ trips }}">
+
+    <input id="trips" type="hidden" name="trips" value="{{ json_trips }}">
 
     <h1>Saved Trips</h1>
 
+    <section class="trip-inner">
+
+      {% for t in trips %}
+
+      <article class="trip-card">
+        <h3 class="title">{{ t.title }}</h3>
+        <h4>Where</h4>
+        <p class="address">{{ t.address }}</p>
+        <h4>When</h4>
+        <p class="date">{{ t.trip_start }}-{{ t.trip_end }}</p>
+        <h4>Description</h4>
+        <p class="description">{{ t.description }}</p>
+        <a href="trip/delete/{{ t.id }}" class="delete-btn">Remove Trip</a>
+
+      </article>
+      
+      {% endfor %}
+      
+    </section>
 
 
   </div>

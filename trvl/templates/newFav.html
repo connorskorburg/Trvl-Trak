@@ -5,12 +5,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>New Favorite</title>
   {% load static %}
-  <link rel="stylesheet" href="{% static 'css/style.css' %}">
   <link rel="stylesheet" href="{% static 'css/map.css' %}">
+  <link rel="stylesheet" href="{% static 'css/style.css' %}">
   <script async defer src="https://maps.googleapis.com/maps/api/js?key={{ key }}&callback=initMap" type="text/javascript"></script>
   <script defer src="{% static 'js/map.js' %}"></script>
 </head>
-<body>
+<body class='bg-color'>
 
   <nav class="top-nav">
 
@@ -27,7 +27,7 @@
       <article class="logout-link">
 
         <a href="/dashboard" class="nav-link">Dashboard</a>
-        <a class="login" href="/logout">logout</a>
+        <a class="logout login" href="/logout">logout</a>
 
       </article>
 

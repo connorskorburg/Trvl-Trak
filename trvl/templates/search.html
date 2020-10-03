@@ -11,7 +11,7 @@
   <script src="https://maps.googleapis.com/maps/api/js?key={{ key }}&callback=initMap&libraries=&v=weekly" defer ></script>
   <script src="{% static 'js/geocode.js' %}"></script>
 </head>
-<body>
+<body class="bg-color">
 
   <nav class="top-nav">
 
@@ -29,7 +29,7 @@
 
         <a href="/dashboard" class="nav-link">Dashboard</a>
 
-        <a class="login" href="/logout">logout</a>
+        <a class="logout" class="login" href="/logout">logout</a>
 
       </article>
 

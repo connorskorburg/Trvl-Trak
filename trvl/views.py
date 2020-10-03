@@ -102,7 +102,8 @@ def dashboard(request):
     # return google map
     context = {
       'key': os.environ.get('GOOGLE_API_KEY'),
-      'trips': json.dumps(trips)
+      'json_trips': json.dumps(trips),
+      'trips': trips
     }
     return render(request, 'dashboard.html', context)
     

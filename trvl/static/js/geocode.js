@@ -28,7 +28,7 @@ function geocodeAddress(geocoder, resultsMap) {
       const content = document.getElementById('results-content');
       // ul elements
       const ul = document.createElement('ul');
-      const address = document.createElement('li');
+      const address = document.createElement('h3');
       const lat = document.createElement('li');
       const lng = document.createElement('li');
       //form elements
@@ -68,6 +68,7 @@ function geocodeAddress(geocoder, resultsMap) {
 
       address.textContent = `${results[0].formatted_address}`;
 
+      address.classList.add('title');
       lat.textContent = `Latitude: ${results[0].geometry.location.lat()}`;
       lng.textContent = `Longitude: ${results[0].geometry.location.lng()}`;
 

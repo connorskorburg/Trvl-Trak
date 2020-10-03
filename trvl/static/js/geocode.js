@@ -82,19 +82,11 @@ function geocodeAddress(geocoder, resultsMap) {
 
       resultsMap.setCenter(results[0].geometry.location);
 
-      // const infoWindow = new google.maps.InfoWindow({
-      //   content: ul,
-      // })
-
       const marker = new google.maps.Marker({
         map: resultsMap,
         position: results[0].geometry.location,
       });
 
-      // infoWindow.open(resultsMap, marker);
-      // marker.addListener('click', ()=> {
-      //   infoWindow.open(resultsMap, marker);
-      // })
     } else {
       alert("Geocode was not successful for the following reason: " + status);
     }

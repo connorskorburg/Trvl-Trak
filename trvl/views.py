@@ -142,7 +142,7 @@ def addFav(request):
     lng = request.GET.get('lng')
 
     if lat == None or lng == None or address == None:
-      return redirect('/')
+      return redirect('/dashboard')
     try:
       lat = float(lat)
       lng = float(lng)
@@ -166,7 +166,6 @@ def newFav(request):
     return redirect('/')
   else:
     # check for errors
-    print(request)
     errors = validate_form(request.POST)
     if len(errors) > 0:
       for key, val in errors.items():

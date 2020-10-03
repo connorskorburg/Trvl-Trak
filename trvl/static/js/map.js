@@ -19,28 +19,33 @@ function initMap(){
 
         const infoWindow = new google.maps.InfoWindow({
             content: content,
-          })
-          infoWindow.open(map, marker);
-          marker.addListener('click', ()=> {
-              infoWindow.open(map, marker);
-          })
-    }
+        })
 
-    parsedResults.forEach(res => {
-        let coords = {
-            "lat": parseFloat(res['latitude']),
-            "lng": parseFloat(res['longitude']),
-        }
-        const ul = document.createElement('ul');
-        const title = document.createElement('h3');
-        const address = document.createElement('li');
-        const date = document.createElement('li');
-        title.textContent = res['title'];
-        address.textContent = res['address'];
-        date.textContent = `${res['trip_start']}-${res['trip_end']}`;
-        ul.appendChild(title);
-        ul.appendChild(address);
-        ul.appendChild(date);
-        addInfo(coords, ul)
-    });
+        infoWindow.open(map, marker);
+
+        marker.addListener('click', ()=> {
+            infoWindow.open(map, marker);
+        })
+    }
+    if(parsedResults.length === 0) {
+        return false
+    } else {
+        parsedResults.forEach(res => {
+            let coords = {
+                "lat": parseFloat(res['latitude']),
+                "lng": parseFloat(res['longitude']),
+            }
+            const ul = document.createElement('ul');
+            const title = document.createElement('h3');
+            const address = document.createElement('li');
+            const date = document.createElement('li');
+            title.textContent = res['title'];
+            address.textContent = res['address'];
+            date.textContent = `${res['trip_start']}-${res['trip_end']}`;
+            ul.appendChild(title);
+            ul.appendChild(address);
+            ul.appendChild(date);
+            addInfo(coords, ul)
+        });
+    }
 }
